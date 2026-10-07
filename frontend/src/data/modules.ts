@@ -200,6 +200,17 @@ export const MODULES: ModuleMeta[] = [
     actionTargets: {"组织培训": "培训中", "提交考核": "已考核", "取消培训": "已取消"},
     metrics: ["待组织培训", "已考核培训", "本月培训场次"],
   },
+  {
+    key: "permit",
+    name: "承包商作业许可",
+    entity: "作业许可",
+    desc: "维护承包商作业许可，围绕许可编号、承包商、作业区域、许可时段与入厂作业人员名单做签发、撤销与门岗核验。",
+    fields: ["许可编号", "承包商", "作业区域", "许可开始", "许可结束", "入厂作业人员名单", "签发人", "签发时间", "撤销人", "撤销时间"],
+    statuses: ["待生效", "生效中", "已失效", "已撤销"],
+    actions: ["签发许可", "撤销许可"],
+    actionTargets: {"签发许可": "生效中", "撤销许可": "已撤销"},
+    metrics: ["生效中许可", "待生效许可", "已撤销许可"],
+  },
 ]
 
 export const MODULE_BY_KEY: Map<string, ModuleMeta> = new Map(

@@ -1,6 +1,7 @@
 import { MODULE_BY_KEY } from '@/data/modules'
 import { allRows, listRows, resetRows, saveRows } from '@/data/local-store'
 import type { ActionResult, EntryRow, ModuleMeta, OverviewResult, PageResult } from '@/data/types'
+import { refreshPermitStatuses } from './permit-service'
 
 // 会写进数据的「往回走」动作：命中就把这条记录标成异常态，看板上能一眼看出来。
 const NEGATIVE_ACTIONS = ['撤销', '作废', '拒绝', '驳回', '停用', '忽略', '下线', '回滚']
@@ -85,6 +86,8 @@ export function downloadEntries(key: string): void {
 }
 
 export function loadOverview(): OverviewResult {
+  // 许可状态随时间漂移，统计前先刷新一遍，看板读到的才是当下结论。
+  refreshPermitStatuses()
   const rows = allRows()
   const modules = [...MODULE_BY_KEY.values()].map((meta) => {
     const entries = rows[meta.key] ?? []

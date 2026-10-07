@@ -20,6 +20,9 @@ export type ModuleMeta = {
   metrics: string[]
 }
 
+/** 岗位：厂安监口签发撤销、承包商只看本单位、门岗只读做入厂核验。 */
+export type Post = 'safety' | 'contractor' | 'gate'
+
 export type PageResult = {
   items: EntryRow[]
   total: number
