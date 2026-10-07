@@ -59,6 +59,7 @@ npm run build
 | 环保指标监控 | `emission` | 环保监控记录 | 监控编号、监控指标、限值要求 |
 | 值班交接班 | `shift` | 交接班记录 | 交接编号、值班班组、班次 |
 | 应急预案管理 | `safetyplan` | 应急预案 | 预案编号、预案名称、适用事故 |
+| 承包商作业许可 | `permit` | 作业许可 | 许可编号、承包商、作业区域、许可时段 |
 | 安全培训管理 | `training` | 培训记录 | 培训编号、培训主题、培训对象 |
 
 ## 约定
@@ -68,4 +69,7 @@ npm run build
 - 字段、状态、动作与流转目标集中在 `frontend/src/data/modules.ts`；示例数据在
   `frontend/src/data/seed.ts`。
 - 状态流转只允许在 `local-service.ts` 里改，页面组件不做业务判断。
+- 承包商作业许可模块的规则（安监口签发/撤销、承包商只看自己的、许可时段与人员名单改单退回、
+  门岗时段核验、撤销联动检修外协清单重排、同编号先落库者赢）收口在
+  `frontend/src/api/permit-service.ts`，页面同样只做渲染。
 - 想回到初始数据：清掉浏览器里 `waste-to-energy-plant:entries` 这一项，或调用 `resetModule(模块)`。

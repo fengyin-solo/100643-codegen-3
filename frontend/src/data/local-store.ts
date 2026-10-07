@@ -40,6 +40,24 @@ export function listRows(key: string): EntryRow[] {
   return allRows()[key] ?? []
 }
 
+// 直读 localStorage 里的持久化内容，不走内存缓存。
+// 两个岗位同时提交同一份单据时，落库前以此为准，只认先写进去的那一份。
+export function persistedRows(key: string): EntryRow[] {
+  if (typeof window === 'undefined' || !window.localStorage) {
+    return listRows(key)
+  }
+  const raw = window.localStorage.getItem(STORAGE_KEY)
+  if (!raw) {
+    return listRows(key)
+  }
+  try {
+    const parsed = JSON.parse(raw) as Record<string, EntryRow[]>
+    return parsed[key] ?? listRows(key)
+  } catch {
+    return listRows(key)
+  }
+}
+
 export function saveRows(key: string, rows: EntryRow[]): void {
   const next = { ...allRows(), [key]: rows }
   cache = next

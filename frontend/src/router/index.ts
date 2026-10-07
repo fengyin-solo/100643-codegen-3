@@ -18,6 +18,7 @@ const Powerstat = () => import('@/views/powerstat/index.vue')
 const Emission = () => import('@/views/emission/index.vue')
 const Shift = () => import('@/views/shift/index.vue')
 const Safetyplan = () => import('@/views/safetyplan/index.vue')
+const Permit = () => import('@/views/permit/index.vue')
 const Training = () => import('@/views/training/index.vue')
 
 const router = createRouter({
@@ -41,6 +42,7 @@ const router = createRouter({
     { path: '/emission', name: 'emission', component: Emission },
     { path: '/shift', name: 'shift', component: Shift },
     { path: '/safetyplan', name: 'safetyplan', component: Safetyplan },
+    { path: '/permit', name: 'permit', component: Permit },
     { path: '/training', name: 'training', component: Training },
   ],
 })
